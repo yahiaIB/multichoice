@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hala.payments.multichoice">
-   <application
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
         android:label="Hala Payments"
         android:icon="@mipmap/launcher_icon">
         <activity

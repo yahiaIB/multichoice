@@ -12,9 +12,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    showFilterDialog(){
-      showDialog(context: context, builder: (_) => AlertDialog(title: const FilterWidget()));
+    showFilterDialog() {
+      showDialog(
+          context: context,
+          builder: (_) => AlertDialog(title: const FilterWidget()));
     }
 
     return ChangeNotifierProvider(
@@ -29,7 +30,8 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(color: Colors.black87),
             ),
             leading: IconButton(
-                onPressed: () => context.read<AuthenticationViewModel>().logout(),
+                onPressed: () =>
+                    context.read<AuthenticationViewModel>().logout(),
                 icon: const Icon(
                   Icons.logout,
                   color: Colors.black87,
@@ -98,14 +100,23 @@ class HomeScreen extends StatelessWidget {
                         style: const TextStyle(color: Colors.red),
                       ),
                     )
-                  : Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: ListView.builder(
-                        itemCount: _viewModel.halaPayments.length,
-                        itemBuilder: (context, index) => HalaPaymentItemWidget(
-                            halaPayment: _viewModel.halaPayments[index]),
-                      ),
-                    ),
+                  : _viewModel.halaPayments.isEmpty
+                      ? const Center(
+                          child: Text(
+                            "لا توجد مدفوعات حتى الآن",
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        )
+                      : Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: ListView.builder(
+                            itemCount: _viewModel.halaPayments.length,
+                            itemBuilder: (context, index) =>
+                                HalaPaymentItemWidget(
+                                    halaPayment:
+                                        _viewModel.halaPayments[index]),
+                          ),
+                        ),
         );
       }),
     );
